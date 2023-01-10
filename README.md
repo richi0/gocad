@@ -23,6 +23,10 @@ Boolean operations
 - difference
 - intersection
 
+## Install
+
+run `go get github.com/richi0/gocad`
+
 ## Usage
 
 Same as SCAD but with type safety, the ability to chain operations and an easy way to create your own complex shapes.
@@ -30,9 +34,16 @@ Same as SCAD but with type safety, the ability to chain operations and an easy w
 The following code creates the 3D model below.
 
 ```go
+package main
+
+import (
+	"fmt"
+	cad "github.com/richi0/gocad"
+)
+
 func main() {
     s := cad.NewSphere(11).Difference(
-		cad.NewSphere(3).Translate(0, 0, 8).Scale(1.5, 1.5, 1.5),
+        cad.NewSphere(3).Translate(0, 0, 8).Scale(1.5, 1.5, 1.5),
         cad.NewSphere(3).Translate(0, 0, -11),
         cad.NewSphere(3).Translate(11, 0, 0),
         cad.NewSphere(3).Translate(-11, 0, 0),
@@ -88,6 +99,13 @@ func NewBox(
 Then use it like this.
 
 ```go
+package main
+
+import (
+	"fmt"
+	cad "github.com/richi0/gocad"
+)
+
 func main() {
 	b := cad.NewBox(120, 60, 20, 5, 5)
 	d := cad.NewDocument(b)
