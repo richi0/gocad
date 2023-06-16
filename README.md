@@ -114,3 +114,79 @@ func main() {
 ```
 
 ![example image](example2.png "Example")
+
+## Extra example
+
+Created shapes can be reused easily. See the following Go code, SCAD code and the 3D-model
+
+```go
+package main
+
+import (
+	"fmt"
+
+	cad "github.com/richi0/gocad"
+)
+
+func main() {
+	x := cad.NewSphere(3).Hull(
+		cad.NewCube(10, 10, 10).Center().Translate(20, 0, 0),
+		cad.NewSphere(3).Translate(40, 0, 0)).Translate(-20, 0, 0)
+	y := x.Rotate(0, 0, 90)
+	z := x.Rotate(0, 90, 0)
+	d := cad.NewDocument(x.Union(y, z))
+	d.Fn = 100
+	fmt.Println(d.Render())
+}
+```
+
+```scad
+$fn = 100;
+union() {
+        translate([-20.000000,0.000000,0.000000]) {
+                hull() {
+                        sphere(3.000000);
+                        translate([20.000000,0.000000,0.000000]) {
+                                translate([-5.000000,-5.000000,-5.000000]) {
+                                        cube([10.000000, 10.000000, 10.000000]);
+                                }
+                        }
+                        translate([40.000000,0.000000,0.000000]) {
+                                sphere(3.000000);
+                        }
+                }
+        }
+        rotate([0.000000,0.000000,90.000000]) {
+                translate([-20.000000,0.000000,0.000000]) {
+                        hull() {
+                                sphere(3.000000);
+                                translate([20.000000,0.000000,0.000000]) {
+                                        translate([-5.000000,-5.000000,-5.000000]) {
+                                                cube([10.000000, 10.000000, 10.000000]);
+                                        }
+                                }
+                                translate([40.000000,0.000000,0.000000]) {
+                                        sphere(3.000000);
+                                }
+                        }
+                }
+        }
+        rotate([0.000000,90.000000,0.000000]) {
+                translate([-20.000000,0.000000,0.000000]) {
+                        hull() {
+                                sphere(3.000000);
+                                translate([20.000000,0.000000,0.000000]) {
+                                        translate([-5.000000,-5.000000,-5.000000]) {
+                                                cube([10.000000, 10.000000, 10.000000]);
+                                        }
+                                }
+                                translate([40.000000,0.000000,0.000000]) {
+                                        sphere(3.000000);
+                                }
+                        }
+                }
+        }
+}
+```
+
+![example image](example3.png "Example")
