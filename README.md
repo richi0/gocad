@@ -1,6 +1,6 @@
 # GOCAD
 
-A simple library for writing [OpenSCAD](https://openscad.org/about.html) code in go.
+A simple library for writing [OpenSCAD](https://openscad.org/about.html) code in Go.
 
 ## Supported features
 

@@ -50,8 +50,8 @@ type Hull struct {
 	Container
 }
 
-func NewHull(o ...Object) *Intersection {
-	return &Intersection{*newContainer("hull", o...)}
+func NewHull(o ...Object) *Hull {
+	return &Hull{*newContainer("hull", o...)}
 }
 
 type Minkowski struct {
